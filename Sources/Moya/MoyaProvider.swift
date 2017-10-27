@@ -154,6 +154,9 @@ public func convertResponseToResult(_ response: HTTPURLResponse?, request: URLRe
             let response = Moya.Response(statusCode: response.statusCode, data: data ?? Data(), request: request, response: response)
             let error = MoyaError.underlying(error, response)
             return .failure(error)
+        case let (_, _, .some(error)):
+            let error = MoyaError.underlying(error, nil)
+            return .failure(error)
         default:
             let error = MoyaError.underlying(NSError(domain: NSURLErrorDomain, code: NSURLErrorUnknown, userInfo: nil), nil)
             return .failure(error)

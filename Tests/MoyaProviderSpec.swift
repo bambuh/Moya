@@ -429,7 +429,7 @@ class MoyaProviderSpec: QuickSpec {
                     }
                 }
 
-                if case .some(MoyaError.underlying(let underlyingError as NSError)) = receivedError {
+                if case .some(MoyaError.underlying(let underlyingError as NSError, nil)) = receivedError {
                     expect(underlyingError) == error
                 } else {
                     fail("Expected to receive error, did not.")
